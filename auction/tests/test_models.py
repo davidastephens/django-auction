@@ -3,7 +3,6 @@ from django.test import TestCase
 from django.template.defaultfilters import slugify
 import datetime
 import auction.utils.generic
-from django.contrib.auth.models import User
 from decimal import Decimal
 from django.contrib.contenttypes.models import ContentType
 
@@ -132,8 +131,8 @@ class BidBasketModelTests(TestCase, TestBaseClassMixin):
     base_class = 'BaseBidBasket'
 
     def setUp(self):
-        self.user = User.objects.create_superuser('fubar', 'fubar@example.com', 'password')
-        self.user2 = User.objects.create_superuser('randomperson', 'randomperson@example.com', 'somepassword')
+        self.user = settings.AUTH_USER_MODEL.objects.create_superuser('fubar', 'fubar@example.com', 'password')
+        self.user2 = settings.AUTH_USER_MODEL.objects.create_superuser('randomperson', 'randomperson@example.com', 'somepassword')
 
         now = auction.utils.generic.get_current_time()
         auction_name = 'Cool auction'
